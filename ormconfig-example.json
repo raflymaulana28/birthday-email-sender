@@ -1,0 +1,12 @@
+{
+	"name": "default",
+	"type": "mongodb",
+	"url": "your-db-url",
+	"synchronize": true,
+	"entities": ["src/entities/*.ts"],
+	"useUnifiedTopology": true,
+	"cli": {
+	  "entitiesDir": "src/entities"
+	}
+  }
+  
