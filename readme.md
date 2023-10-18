@@ -10,8 +10,6 @@ Birthday Email Sender is a Node.js web application built with Express, MongoDB, 
 - [Usage](#usage)
 - [API Endpoints](#api-endpoints)
 - [Configuration](#configuration)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
@@ -76,13 +74,5 @@ You can configure the application by editing the following files:
 - `ormconfig.json`: Configure your MongoDB connection details.
 
 Make sure to check the application's documentation for more details on these configuration options.
-
-## Contributing
-
-We welcome contributions from the open-source community. If you want to contribute to the project, please follow the guidelines in [CONTRIBUTING.md](CONTRIBUTING.md).
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
 
 ---
