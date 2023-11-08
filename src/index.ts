@@ -2,6 +2,7 @@ import "reflect-metadata";
 import cron from "node-cron";
 import express, { Request, Response } from "express";
 import userRoutes from "./routes/user";
+import logRoutes from "./routes/log";
 import { User } from "./entities/User";
 import { sendBirthdayMessages } from "./services/send-birthday";
 import { appDataSource } from "./config/appDataSource";
@@ -10,6 +11,8 @@ const app = express();
 const port = 9000;
 app.use(express.json());
 app.use(userRoutes);
+app.use(logRoutes);
+
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello, Express with TypeScript and TypeORM!");
 });

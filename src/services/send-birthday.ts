@@ -1,6 +1,9 @@
 import moment from "moment-timezone";
 import { User } from "../entities/User";
 import axios from "axios";
+import { LogService } from "./log";
+const logs = new LogService();
+
 async function retryApiRequest(
   url: string,
   data: {
@@ -16,11 +19,19 @@ async function retryApiRequest(
       return response.data;
     } catch (error) {
       if (attempt < maxRetries) {
+        logs.createLog({
+          message: `Attempt ${attempt} failed. Retrying in ${delay} milliseconds.`,
+          status: "error",
+        });
         console.log(
           `Attempt ${attempt} failed. Retrying in ${delay} milliseconds.`
         );
         await delayAsync(delay);
       } else {
+        logs.createLog({
+          message: `Max retries (${maxRetries}) reached. API request failed.`,
+          status: "error",
+        });
         console.error(
           `Max retries (${maxRetries}) reached. API request failed.`
         );
@@ -62,11 +73,19 @@ export const sendBirthdayMessages = (users: User[]): void => {
         1000
       )
         .then((data) => {
+          logs.createLog({
+            message: `Sending birthday message to ${user.name} in their timezone: ${userTimezone}`,
+            status: "success",
+          });
           console.log(
             `Sending birthday message to ${user.name} in their timezone: ${userTimezone}`
           );
         })
         .catch((error) => {
+          logs.createLog({
+            message: `Error sending birthday message to ${user.name} in their timezone: ${userTimezone}`,
+            status: "error",
+          });
           console.log(
             `Error sending birthday message to ${user.name} in their timezone: ${userTimezone}`
           );

@@ -7,6 +7,7 @@ require("reflect-metadata");
 const node_cron_1 = __importDefault(require("node-cron"));
 const express_1 = __importDefault(require("express"));
 const user_1 = __importDefault(require("./routes/user"));
+const log_1 = __importDefault(require("./routes/log"));
 const User_1 = require("./entities/User");
 const send_birthday_1 = require("./services/send-birthday");
 const appDataSource_1 = require("./config/appDataSource");
@@ -15,6 +16,7 @@ const app = (0, express_1.default)();
 const port = 9000;
 app.use(express_1.default.json());
 app.use(user_1.default);
+app.use(log_1.default);
 app.get("/", (req, res) => {
     res.send("Hello, Express with TypeScript and TypeORM!");
 });
