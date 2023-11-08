@@ -2,11 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserController = void 0;
 const User_1 = require("../entities/User");
-const typeorm_1 = require("typeorm");
 const mongodb_1 = require("mongodb");
+const appDataSource_1 = require("../config/appDataSource");
 class UserController {
     async createUser(req, res) {
-        const userRepository = (0, typeorm_1.getRepository)(User_1.User);
+        const userRepository = appDataSource_1.appDataSource.getRepository(User_1.User);
         const { name, email, birthDate, location } = req.body;
         const user = new User_1.User();
         user.name = name;
@@ -17,13 +17,13 @@ class UserController {
         res.json(user);
     }
     async getUsers(req, res) {
-        const userRepository = (0, typeorm_1.getRepository)(User_1.User);
+        const userRepository = appDataSource_1.appDataSource.getRepository(User_1.User);
         const users = await userRepository.find();
         res.json(users);
     }
     async getUserById(req, res) {
         const userId = req.params.id;
-        const userRepository = (0, typeorm_1.getRepository)(User_1.User);
+        const userRepository = appDataSource_1.appDataSource.getRepository(User_1.User);
         const user = await userRepository.findOne({
             where: { _id: new mongodb_1.ObjectId(userId) },
         });
@@ -34,7 +34,7 @@ class UserController {
     }
     async updateUser(req, res) {
         const userId = req.params.id;
-        const userRepository = (0, typeorm_1.getRepository)(User_1.User);
+        const userRepository = appDataSource_1.appDataSource.getRepository(User_1.User);
         const user = await userRepository.findOne({
             where: { _id: new mongodb_1.ObjectId(userId) },
         });
@@ -51,7 +51,7 @@ class UserController {
     }
     async deleteUser(req, res) {
         const userId = req.params.id;
-        const userRepository = (0, typeorm_1.getRepository)(User_1.User);
+        const userRepository = appDataSource_1.appDataSource.getRepository(User_1.User);
         const user = await userRepository.findOne({
             where: { _id: new mongodb_1.ObjectId(userId) },
         });

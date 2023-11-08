@@ -1,11 +1,11 @@
 import { User } from "../entities/User";
-import { getRepository, Repository } from "typeorm";
 import { Request, Response } from "express";
 import { ObjectId } from "mongodb";
+import { appDataSource } from "../config/appDataSource";
 
 export class UserController {
   async createUser(req: Request, res: Response): Promise<void> {
-    const userRepository = getRepository(User);
+    const userRepository = appDataSource.getRepository(User);
     const { name, email, birthDate, location } = req.body;
     const user = new User();
     user.name = name;
@@ -16,14 +16,14 @@ export class UserController {
     res.json(user);
   }
   async getUsers(req: Request, res: Response) {
-    const userRepository = getRepository(User);
+    const userRepository =appDataSource.getRepository(User);
     const users = await userRepository.find();
     res.json(users);
   }
 
   async getUserById(req: Request, res: Response) {
     const userId = req.params.id as any;
-    const userRepository = getRepository(User);
+    const userRepository =appDataSource.getRepository(User);
     const user = await userRepository.findOne({
       where: { _id: new ObjectId(userId) },
     } as any);
@@ -35,7 +35,7 @@ export class UserController {
 
   async updateUser(req: Request, res: Response) {
     const userId = req.params.id as any;
-    const userRepository = getRepository(User);
+    const userRepository =appDataSource.getRepository(User);
     const user = await userRepository.findOne({
       where: { _id: new ObjectId(userId) },
     } as any);
@@ -53,7 +53,7 @@ export class UserController {
 
   async deleteUser(req: Request, res: Response) {
     const userId = req.params.id as any;
-    const userRepository = getRepository(User);
+    const userRepository =appDataSource.getRepository(User);
     const user = await userRepository.findOne({
       where: { _id: new ObjectId(userId) },
     } as any);
