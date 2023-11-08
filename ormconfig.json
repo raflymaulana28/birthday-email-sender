@@ -1,0 +1,11 @@
+{
+  "name": "default",
+  "type": "mongodb",
+  "url": "mongodb+srv://murahYohAyok55:persib123@cluster0.2vhgo.mongodb.net/birthdayapp?retryWrites=true&w=majority",
+  "synchronize": true,
+  "entities": ["src/entities/*.ts"],
+  "useUnifiedTopology": true,
+  "cli": {
+    "entitiesDir": "src/entities"
+  }
+}
