@@ -4,10 +4,11 @@ exports.appDataSource = void 0;
 const typeorm_1 = require("typeorm");
 const User_1 = require("../entities/User");
 const Log_1 = require("../entities/Log");
+require("dotenv").config();
 exports.appDataSource = new typeorm_1.DataSource({
     name: "default",
     type: "mongodb",
-    url: "mongodb://murahYohAyok55:persib123@cluster0-shard-00-00.2vhgo.mongodb.net:27017,cluster0-shard-00-01.2vhgo.mongodb.net:27017,cluster0-shard-00-02.2vhgo.mongodb.net:27017/?ssl=true&replicaSet=atlas-zowunz-shard-0&authSource=admin&retryWrites=true&w=majority",
+    url: process.env.MONGO_URL,
     entities: [User_1.User, Log_1.Log],
     synchronize: true,
     useNewUrlParser: true,
